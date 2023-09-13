@@ -19,11 +19,9 @@ public class Lab1ChausKI306 {
     public static char[][] generateJaggedArr(int size, char symbol) {
         char[][] jaggedArr = new char[size][];
 
-        for (int i = 0; i < size; i++) {
-            jaggedArr[i] = new char[i + 1];
-            Arrays.fill(jaggedArr[i], ' ');
+        for (int i = size/2; i < size; i++) {
+            jaggedArr[i] = new char[i+1];
         }
-
         for (int i = size / 2; i < size; i++) {
             int spaces = Math.abs(i - size + 1);
             for (int j = spaces; j < (size - spaces); j++) {
@@ -38,9 +36,8 @@ public class Lab1ChausKI306 {
      * The entry point of the program.
      * 
      * @param args The command-line arguments (not used).
-     * @throws FileNotFoundException Exception thrown if the file is not found.
      */
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         int nRows;        // Number of rows in the matrix
         char[][] arr;     // Jagged array
         char filler = ' '; // Character for filling the matrix
@@ -59,12 +56,8 @@ public class Lab1ChausKI306 {
             arr = generateJaggedArr(nRows, filler); // Generate the matrix
             printArray(arr); // Print the matrix to the screen
             writeToTextFile(arr); // Write the matrix to a file
-        }
-        else if (filler == ' ') {
-        	System.out.println("\nNo character entered placeholder");
-        }
-        else {
-            System.out.println("\nToo many characters fillers");
+        } else {
+            System.out.println("\nNo character entered. Placeholder");
         }
     }
 
@@ -75,12 +68,17 @@ public class Lab1ChausKI306 {
      */
     public static void printArray(char[][] arr) {
         for (char[] row : arr) {
-            for (char c : row) {
-                System.out.print(c + " ");
+            if (row == null || row.length == 0) {
+                System.out.println();
+            } else {
+                for (char c : row) {
+                    System.out.print(c + " ");
+                }
+                System.out.println();
             }
-            System.out.println();
         }
     }
+
 
     /**
      * Writes the jagged array to a text file.
@@ -90,10 +88,14 @@ public class Lab1ChausKI306 {
     public static void writeToTextFile(char[][] arr) {
         try (PrintWriter fout = new PrintWriter("MyFile.txt")) {
             for (char[] row : arr) {
-                for (char c : row) {
-                    fout.print(c + " ");
+                if (row == null || row.length == 0) {
+                    fout.println();
+                } else {
+                    for (char c : row) {
+                        fout.print(c + " ");
+                    }
+                    fout.println();
                 }
-                fout.println();
             }
             System.out.println("\nData written to MyFile.txt");
         } catch (FileNotFoundException e) {
