@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"KI.Chaus.Lab2","l":"AlpinistEquipment"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"KI.Chaus.Lab3","l":"MilitaryAlpinistEquipment"}];updateSearchResults();

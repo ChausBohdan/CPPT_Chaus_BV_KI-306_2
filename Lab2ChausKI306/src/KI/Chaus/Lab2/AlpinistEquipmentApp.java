@@ -2,7 +2,6 @@
  * 
  */
 package KI.Chaus.Lab2;
-// import KI.Chaus.Lab2.*;
 
 /**
  * 
