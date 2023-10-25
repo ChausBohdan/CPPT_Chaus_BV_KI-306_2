@@ -18,19 +18,33 @@ public class Lab1ChausKI306 {
      */
     public static char[][] generateJaggedArr(int size, char symbol) {
         char[][] jaggedArr = new char[size][];
+        char symbol2 = '+';
 
         for (int i = size/2; i < size; i++) {
             jaggedArr[i] = new char[i+1];
         }
         for (int i = size / 2; i < size; i++) {
-            int spaces = Math.abs(i - size + 1);
-            for (int j = spaces; j < (size - spaces); j++) {
-                jaggedArr[i][j] = symbol;
+        	
+        		int spaces = Math.abs(i - size + 1);
+                for (int j = spaces; j < (size - spaces); j++) {
+                	if(j == size/2 && size % 2 == 1) {
+                		
+                    jaggedArr[i][j] = symbol2;
+                }
+                	else if(j== size/2 && size % 2 == 0) {
+                		jaggedArr[i][j] = symbol2;
+                		jaggedArr[i][j-1] = symbol2;
+                		}
+                	else {
+                		jaggedArr[i][j] = symbol;
+                	}
+                	
+                	}
             }
+        return jaggedArr;
         }
 
-        return jaggedArr;
-    }
+        
 
     /**
      * The entry point of the program.
@@ -42,7 +56,7 @@ public class Lab1ChausKI306 {
         char[][] arr;     // Jagged array
         char filler = ' '; // Character for filling the matrix
         Scanner in = new Scanner(System.in); // Object for reading input
-
+        
         // Prompt the user for the size of the square matrix
         System.out.print("Enter size of square matrix: ");
         nRows = in.nextInt();
@@ -59,6 +73,7 @@ public class Lab1ChausKI306 {
         } else {
             System.out.println("\nNo character entered. Placeholder");
         }
+        in.close();
     }
 
     /**
@@ -85,21 +100,25 @@ public class Lab1ChausKI306 {
      * 
      * @param arr The jagged array.
      */
-    public static void writeToTextFile(char[][] arr) {
-        try (PrintWriter fout = new PrintWriter("MyFile.txt")) {
-            for (char[] row : arr) {
-                if (row == null || row.length == 0) {
-                    fout.println();
-                } else {
-                    for (char c : row) {
-                        fout.print(c + " ");
-                    }
-                    fout.println();
-                }
-            }
-            System.out.println("\nData written to MyFile.txt");
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: File not found");
-        }
-    }
+
+ public static void writeToTextFile(char[][] arr) {
+     try (RandomAccessFile file = new RandomAccessFile("MyFile.txt", "rw")) {
+         for (char[] row : arr) {
+             if (row == null || row.length == 0) {
+                 file.writeBytes("\n");
+             } else {
+                 for (char c : row) {
+                     char toWrite = (c == '+') ? ' ' : c; // Replace '+' with ' '
+                     file.writeBytes(toWrite + " ");
+                 }
+                 file.writeBytes("\n");
+             }
+         }
+         System.out.println("\nData written to MyFile.txt");
+     } catch (IOException e) {
+         System.out.println("Error: " + e.getMessage());
+     }
+ }
+
+
 }

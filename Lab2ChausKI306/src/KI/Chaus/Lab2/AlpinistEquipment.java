@@ -17,13 +17,17 @@ import java.util.Map;
 public class AlpinistEquipment {
     private Map<String, Integer> quantities;
     private Map<String, Double> weights;
-
+    public String[] itemNames;//зміна
+    public int itemCount;//зміна
+    public static String List1 = "";
     /**
      * Constructor to initialize the equipment inventory.
      */
     public AlpinistEquipment() {
         quantities = new HashMap<>();
         weights = new HashMap<>();
+        itemNames = new String[10];//зміна
+        itemCount = 0;//зміна
     }
 
     /**
@@ -33,12 +37,26 @@ public class AlpinistEquipment {
      * @param quantity The quantity of the item to be added.
      * @param weight The weight of a single item in kilograms.
      */
+    private void resizeItemNamesArray() {
+        String[] newArray = new String[itemNames.length * 2];
+        System.arraycopy(itemNames, 0, newArray, 0, itemNames.length);
+        itemNames = newArray;
+    }
     public void addItem(String itemName, int quantity, double weight) {
-        quantities.put(itemName, quantities.getOrDefault(itemName, 0) + quantity);
+    	quantities.put(itemName, quantities.getOrDefault(itemName, 0) + quantity);
         weights.put(itemName, weight);
+
+        if (itemCount == itemNames.length) {//зміна
+            resizeItemNamesArray();
+        }
+        List1 = List1 + itemName + ", ";
+        
+        itemNames[itemCount] = itemName;
+        itemCount++;//зміна
         writeToLogFile("Added " + quantity + " " + itemName + "(s) with a total weight of " + (quantity * weight) + " kg.");
     }
-
+    
+    
     /**
      * Removes a specified quantity of an item from the inventory.
      * 
@@ -81,6 +99,11 @@ public class AlpinistEquipment {
             System.out.println("Item Name: " + itemName);
             System.out.println("Quantity: " + quantities.get(itemName));
             System.out.println("Weight: " + weights.get(itemName) + " kg");
+        }
+    }
+    public void displayAllInventoryNames() {//зміна
+        for (int i = 0; i < itemCount; i++) {
+            System.out.println(itemNames[i]);
         }
     }
     

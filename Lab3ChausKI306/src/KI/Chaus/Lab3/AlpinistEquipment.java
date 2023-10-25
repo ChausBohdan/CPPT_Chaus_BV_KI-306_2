@@ -14,7 +14,7 @@ import java.util.Map;
  * @author Chaus Bohdan
  * @version 1.0
  */
-public abstract class AlpinistEquipment {
+public abstract class AlpinistEquipment{
     private Map<String, Integer> quantities;
     private Map<String, Double> weights;
 

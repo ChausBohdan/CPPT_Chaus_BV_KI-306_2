@@ -34,7 +34,7 @@ public class EquationsApp {
             } catch (CalcException ex) {
                 out.print(ex.getMessage());
             }
-
+            in.close();
         } catch (FileNotFoundException ex) {
             out.print("Exception reason: File not found");
         } finally {
