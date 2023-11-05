@@ -1,154 +1,177 @@
 package KI306.Chaus.Lab6;
 import java.util.ArrayList;
 
+// Define a class named ToolBox that can hold objects of type Tool or its subtypes
 class ToolBox<T extends Tool> {
-  private ArrayList<T> tools;
+    private ArrayList<T> tools; // ArrayList to store tools
 
-  public ToolBox() {
-      tools = new ArrayList<>();
-  }
+    // Constructor for ToolBox
+    public ToolBox() {
+        tools = new ArrayList<>(); // Initialize the ArrayList of tools
+    }
 
-  public T findMin() {
-      if (!tools.isEmpty()) {
-          T min = tools.get(0);
-          for (int i = 1; i < tools.size(); i++) {
-              if (tools.get(i).compareTo(min) < 0)
-                  min = tools.get(i);
-          }
-          return min;
-      }
-      return null;
-  }
+    // Find and return the smallest tool based on comparison
+    public T findMin() {
+        if (!tools.isEmpty()) {
+            T min = tools.get(0);
+            for (int i = 1; i < tools.size(); i++) {
+                if (tools.get(i).compareTo(min) < 0)
+                    min = tools.get(i);
+            }
+            return min;
+        }
+        return null;
+    }
 
-  public void addTool(T tool) {
-      tools.add(tool);
-      System.out.print("tool added: ");
-      tool.print();
-  }
+    // Add a tool to the toolbox
+    public void addTool(T tool) {
+        tools.add(tool);
+        System.out.print("tool added: ");
+        tool.print(); // Print information about the added tool
+    }
 
-  public void removeTool(int i) {
-      if (i >= 0 && i < tools.size()) {
-          tools.remove(i);
-          System.out.println("Tool removed at index " + i);
-      } else {
-          System.out.println("Invalid index. Cannot remove tool.");
-      }
-  }
+    // Remove a tool at a specified index
+    public void removeTool(int i) {
+        if (i >= 0 && i < tools.size()) {
+            tools.remove(i);
+            System.out.println("Tool removed at index " + i);
+        } else {
+            System.out.println("Invalid index. Cannot remove tool.");
+        }
+    }
 
-  public void printContents() {
-      if (!tools.isEmpty()) {
-          for (T tool : tools) {
-              tool.print();
-          }
-      } else {
-          System.out.println("Tool box is empty. No tools available.");
-      }
-  }
+    // Print information about the tools in the toolbox
+    public void printContents() {
+        if (!tools.isEmpty()) {
+            for (T tool : tools) {
+                tool.print(); // Print information about each tool
+            }
+        } else {
+            System.out.println("Tool box is empty. No tools available.");
+        }
+    }
 }
 
+// Define a class named Screwdriver that implements the Tool interface
 class Screwdriver implements Tool {
-  private String screwdriverType;
-  private String screwdriverBrand;
-  private double screwdriverCost;
-  private int screwdriverSize;
+    private String screwdriverType;
+    private String screwdriverBrand;
+    private double screwdriverCost;
+    private int screwdriverSize;
 
-  public Screwdriver(String sType, String sBrand, double sCost, int sSize) {
-	  screwdriverType = sType;
-	  screwdriverBrand = sBrand;
-	  screwdriverCost = sCost;
-	  screwdriverSize = sSize;
-  }
+    // Constructor for Screwdriver
+    public Screwdriver(String sType, String sBrand, double sCost, int sSize) {
+        screwdriverType = sType;
+        screwdriverBrand = sBrand;
+        screwdriverCost = sCost;
+        screwdriverSize = sSize;
+    }
 
-  public String getScrewdriverType() {
-      return screwdriverType;
-  }
+    // Getter and setter methods for screwdriver properties
 
-  public void setScrewdriverType(String type) {
-	  screwdriverType = type;
-  }
+    public String getScrewdriverType() {
+        return screwdriverType;
+    }
 
-  public String getScrewdriverBrand() {
-      return screwdriverBrand;
-  }
+    public void setScrewdriverType(String type) {
+        screwdriverType = type;
+    }
 
-  public void setScrewdriverBrand(String brand) {
-	  screwdriverBrand = brand;
-  }
+    public String getScrewdriverBrand() {
+        return screwdriverBrand;
+    }
 
-  public double getScrewdriverCost() {
-      return screwdriverCost;
-  }
+    public void setScrewdriverBrand(String brand) {
+        screwdriverBrand = brand;
+    }
 
-  public void setScrewdriverCost(double cost) {
-	  screwdriverCost = cost;
-  }
+    public double getScrewdriverCost() {
+        return screwdriverCost;
+    }
 
-  public void setScrewdriverSize(int size) {
-	  screwdriverSize = size;
-  }
+    public void setScrewdriverCost(double cost) {
+        screwdriverCost = cost;
+    }
 
-  public int getSize() {
-      return screwdriverSize;
-  }
+    public void setScrewdriverSize(int size) {
+        screwdriverSize = size;
+    }
 
-  public int compareTo(Tool tool) {
-      Integer s = screwdriverSize;
-      return s.compareTo(tool.getSize());
-  }
+    // Implement the getSize method from the Tool interface
+    public int getSize() {
+        return screwdriverSize;
+    }
 
-  public void print() {
-      System.out.println("[Screwdriver]");
-      System.out.println("  Type: " + screwdriverType);
-      System.out.println("  Brand: " + screwdriverBrand);
-      System.out.println("  Cost: " + screwdriverCost + " $");
-      System.out.println("  Size: " + screwdriverSize);
-      System.out.println();
-  }
+    // Implement the compareTo method from the Comparable interface
+    public int compareTo(Tool tool) {
+        Integer s = screwdriverSize;
+        return s.compareTo(tool.getSize());
+    }
+
+    // Print information about the screwdriver
+    public void print() {
+        System.out.println("[Screwdriver]");
+        System.out.println("  Type: " + screwdriverType);
+        System.out.println("  Brand: " + screwdriverBrand);
+        System.out.println("  Cost: " + screwdriverCost + " $");
+        System.out.println("  Size: " + screwdriverSize);
+        System.out.println();
+    }
 }
 
-
+// Define a class named Wrench that implements the Tool interface
 class Wrench implements Tool {
-  private String wrenchBrand;
-  private int wrenchWeight;
-  private int wrenchSize;
+    private String wrenchBrand;
+    private int wrenchWeight;
+    private int wrenchSize;
 
-  public Wrench(String wBrand, int wWeight, int wSize) {
-	  wrenchBrand = wBrand;
-	  wrenchWeight = wWeight;
-	  wrenchSize = wSize;
-  }
+    // Constructor for Wrench
+    public Wrench(String wBrand, int wWeight, int wSize) {
+        wrenchBrand = wBrand;
+        wrenchWeight = wWeight;
+        wrenchSize = wSize;
+    }
 
-  public String getWrenchBrand() {
-      return wrenchBrand;
-  }
-  public void setWrenchBrand(String brand) {
-	  wrenchBrand = brand;
-  }
+    // Getter and setter methods for wrench properties
 
-  public int getWrenchWeight() {
-      return wrenchWeight;
-  }
-  public void setWrenchWeight(int weight) {
-	  wrenchWeight = weight;
-  }
+    public String getWrenchBrand() {
+        return wrenchBrand;
+    }
 
-  public void SetWrenchSize(int size) {
-	  wrenchSize = size;
-  }
+    public void setWrenchBrand(String brand) {
+        wrenchBrand = brand;
+    }
 
-  public int getSize() {
-      return wrenchSize;
-  }
-  public int compareTo(Tool tool) {
-      Integer s = wrenchSize;
-      return s.compareTo(tool.getSize());
-  }
-  public void print() {
-      System.out.println("[Wrench]");
-      System.out.println("  Brand: " + wrenchBrand);
-      System.out.println("  Genre: " + wrenchWeight);
-      System.out.println("  Size: " + wrenchSize);
-      System.out.println();
-  }
+    public int getWrenchWeight() {
+        return wrenchWeight;
+    }
+
+    public void setWrenchWeight(int weight) {
+        wrenchWeight = weight;
+    }
+
+    public void setWrenchSize(int size) {
+        wrenchSize = size;
+    }
+
+    // Implement the getSize method from the Tool interface
+    public int getSize() {
+        return wrenchSize;
+    }
+
+    // Implement the compareTo method from the Comparable interface
+    public int compareTo(Tool tool) {
+        Integer s = wrenchSize;
+        return s.compareTo(tool.getSize());
+    }
+
+    // Print information about the wrench
+    public void print() {
+        System.out.println("[Wrench]");
+        System.out.println("  Brand: " + wrenchBrand);
+        System.out.println("  Weight: " + wrenchWeight);
+        System.out.println("  Size: " + wrenchSize);
+        System.out.println();
+    }
 }
 

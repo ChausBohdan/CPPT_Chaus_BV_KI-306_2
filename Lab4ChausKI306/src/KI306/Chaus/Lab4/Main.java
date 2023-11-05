@@ -14,6 +14,14 @@ class NegativeNumberException extends Exception {
 }
 
 class Equations {
+    /**
+     * Calculates the value of 'y' based on the input 'x'.
+     *
+     * @param x The input value.
+     * @return The calculated value of 'y'.
+     * @throws CalcException if a calculation error occurs.
+     * @throws NegativeNumberException if 'x' is negative.
+     */
     public double calculate(int x) throws CalcException, NegativeNumberException {
         if (x < 0) {
             throw new NegativeNumberException();

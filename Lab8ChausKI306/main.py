@@ -1,37 +1,28 @@
-from AlpinistEquipment import AlpinistEquipment
+import math  # Import the math module for mathematical operations
 
-def main():
-    equipment1 = AlpinistEquipment()
-    equipment1.add_item("Climbing Rope1", 2, 3.5)
+class CalcException(Exception):
+    def __init__(self, cause=None):
+        super().__init__(cause)  # Initialize the CalcException with an optional cause message
 
-    equipment2 = AlpinistEquipment()
-    equipment2.add_item("Carabiner", 3, 3.5)
+class Equations:
+    def calculate(self, x):
+        y = 0  # Initialize variable y
 
-    equipment1.display_inventory()  # Display the inventory of equipment1
+        rad = x * 3.14159 / 180.0  # Convert the angle x to radians
 
-    equipment1.clear_log_file()
+        try:
+            denominator = x - math.cos(2 * rad)  # Calculate the denominator of the expression
+            if denominator == 0:
+                raise ArithmeticError()  # Raise an exception if the denominator is zero
 
-    equipment1.add_item("Climbing Rope", 2, 3.5)
-    equipment1.add_item("Carabiner", 10, 0.15)
-    
-    equipment1.update_item("Climbing Rope", 3, 4.0)
+            y = math.sin(rad - 9) / denominator  # Calculate the value of y
+            if math.isnan(y) or math.isinf(y):
+                raise ArithmeticError()  # Raise an exception if y is NaN (Not a Number) or Infinite
 
-    equipment1.display_inventory()
-    print("Total Weight:", equipment1.get_total_weight(), "kg")
+        except ArithmeticError:
+            if x == 0:
+                raise CalcException("Exception reason: X = 0")  # Raise a CalcException with a specific message for x = 0
+            else:
+                raise CalcException("Exception reason: Division by zero")  # Raise a CalcException with a specific message for division by zero
 
-    print("Quantity of Climbing Rope:", equipment1.get_quantity("Climbing Rope"))
-
-    if equipment1.contains_item("Helmet"):
-        print("Helmet is in inventory.")
-    else:
-        print("Helmet is not in inventory.")
-
-    equipment1.remove_item("Climbing Rope", 2)
-    equipment1.display_inventory()
-    print("Total Weight:", equipment1.get_total_weight(), "kg")
-
-    equipment1.remove_all_items()
-
-
-if __name__ == "__main__":
-    main()
+        return y  # Return the calculated value of y

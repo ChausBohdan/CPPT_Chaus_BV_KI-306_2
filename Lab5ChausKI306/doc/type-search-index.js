@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"KI306.Chaus.Lab5","l":"EquationsApp"}];updateSearchResults();
